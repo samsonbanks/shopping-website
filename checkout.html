@@ -1,0 +1,68 @@
+<!-- checkout.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Checkout</h1>
+</header>
+
+<main>
+  <form action="checkout.php" method="POST">
+    <!-- Your form fields here -->
+    
+    <label for="address">Address</label>
+    <input type="text" id="adress" name="adress" required>
+
+    <label for="card-number">Card Number:</label>
+    <input type="text" id="card-number" name="card-number" required>
+
+    <label for="expiry-date">Expiry Date:</label>
+    <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" name="cvv" required>
+
+    <!-- Submit button -->
+    <button type="submit">Place Order</button>
+</form>
+</main>
+
+<script>
+  // script.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    const checkoutForm = document.getElementById('checkout-form');
+
+    checkoutForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Basic form validation
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+        const cardNumber = document.getElementById('card-number').value;
+        const expiryDate = document.getElementById('expiry-date').value;
+        const cvv = document.getElementById('cvv').value;
+
+        if (!name || !email || !address || !cardNumber || !expiryDate || !cvv) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        // Simulate order processing
+        alert('Thank you for your order!'); // Placeholder action
+        // You can implement actual order processing and redirect to a confirmation page here
+    });
+});
+</script>
+
+</body>
+</html>

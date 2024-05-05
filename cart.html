@@ -1,0 +1,217 @@
+<!-- cart.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="2nd-menu.css">
+    <style>
+        .button {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .shop {
+            background-color: orange;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .shop:hover {
+            opacity: 0.7;
+        }
+
+        .shop:active {
+            opacity: 0.8;
+        }
+
+        .remove-from-cart {
+            background-color: orange;
+            padding: 5px;
+            border: none;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .remove-from-cart:hover {
+            opacity: 0.7;
+        }
+
+        .remove-from-cart:active {
+            opacity: 0.9;
+        }
+
+        .p {
+            border: 2px solid black;
+            padding: 5px;
+            background-color: orange;
+            border-radius: 12px;
+            cursor: default;
+            text-align: center;
+            align-items: center;
+        }
+
+        img {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="image">
+          <img src="images-2/logo.png">
+        </div>
+        <ul>
+          <li title="Home"><a href="Index.html">Home</a></li>
+          <li title="About us"><a href="About-us.html">About us</a></li>
+          <li title="Services"><a href="Services.html">Service</a></li>
+          <li title="Contact us"><a href="contact-us.html">Contact Us</a></li>
+          <li title="Cart"><a href="cart.html">Cart <span id="cart-count">0</span></a></li>
+        </ul>
+      </div>
+</header>
+
+<div class="body">
+    <main>
+        <section id="cart-container">
+            <!-- Cart items will be dynamically generated here -->
+        </section>
+        <div class="button">
+            <button id="checkout">Checkout</button> <!-- Add the Checkout button -->
+            <button onclick="window.location.href='samson-shopping-website.html'" class="shop">Back to Shopping</button>
+            <button id="clear-cart">Clear Cart</button>
+        </div>
+    </main>
+    
+    <footer>
+        <!-- Add any footer content here -->
+    </footer>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // JavaScript code for cart page
+    document.addEventListener('DOMContentLoaded', function() {
+        // Existing code...
+        const cartContainer = document.getElementById('cart-container');
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        function updateCartUI() {
+            cartContainer.innerHTML = '';
+            if (cartItems.length > 0) {
+                cartItems.forEach(item => {
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.classList.add('cart-item');
+                    cartItemElement.innerHTML = `
+                    <img src="${item.image}">
+                        <p>${item.name} - &#8358;${item.price.toFixed(2)}</p>
+                        <input type="number" class="item-quantity" data-id="${item.id}" value="${item.quantity}" min="1">
+                        <button class="remove-from-cart" data-id="${item.id}">Remove</button>
+                    `;
+                    cartContainer.appendChild(cartItemElement);
+                });
+            } else {
+                const emptyCartMessage = document.createElement('p');
+                emptyCartMessage.innerHTML = `<p class='p'>Your cart is empty....</p>`
+                cartContainer.appendChild(emptyCartMessage);
+            }
+        }
+
+        updateCartUI();
+
+        function updateCartItemQuantity(itemId, quantity) {
+            cartItems.forEach(item => {
+                if (item.id === itemId) {
+                    item.quantity = quantity;
+                }
+            });
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartUI();
+            updateCartCount(); // Update cart count
+        }
+
+        // Event listener for quantity input change
+        cartContainer.addEventListener('change', function(event) {
+            if (event.target.classList.contains('item-quantity')) {
+                const itemId = parseInt(event.target.getAttribute('data-id'));
+                const newQuantity = parseInt(event.target.value);
+                updateCartItemQuantity(itemId, newQuantity);
+            }
+        });
+
+        const checkoutButton = document.getElementById('checkout');
+        const clearCartButton = document.getElementById('clear-cart');
+
+        checkoutButton.addEventListener('click', function() {
+            window.location.href = 'checkout.html'; // Redirect to the checkout page
+        });
+
+        clearCartButton.addEventListener('click', function() {
+            localStorage.removeItem('cartItems');
+            cartItems = [];
+            updateCartUI();
+            updateCartCount(); // Update cart count
+        });
+
+        // Existing code for adding products to cart
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = parseInt(button.getAttribute('data-id'));
+                const selectedProduct = products.find(product => product.id === productId);
+                if (selectedProduct) {
+                    const existingCartItem = cartItems.find(item => item.id === productId);
+                    if (existingCartItem) {
+                        existingCartItem.quantity += 1;
+                    } else {
+                        cartItems.push({ ...selectedProduct, quantity: 1 });
+                    }
+                    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                    updateCartCount();
+                }
+            });
+        });
+
+        function updateCartCount() {
+            const cartCountElement = document.getElementById('cart-count');
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const totalCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+            cartCountElement.textContent = totalCount;
+        }
+
+        updateCartCount();
+    });
+
+const cartTotal = document.getElementById('cart-total');
+cartTotal.textContent = total.toFixed();
+
+const cartContainer = document.getElementById('remove-from-cart')
+
+cartContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-from-cart')) {
+                const itemId = parseInt(event.target.getAttribute('data-id'));
+                removeCartItem(itemId);
+            }
+        });
+
+        function removeCartItem(itemId) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems = cartItems.filter(item => item.id !== itemId);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartUI();
+            updateCartCount();
+        }
+
+</script>
+
+</body>
+</html>

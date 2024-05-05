@@ -1,0 +1,117 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:image" content="images-2/github.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samson Banks | Shopping Website Nigeria</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="2nd-menu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="image">
+            <img src="images-2/logo1.png">
+            </div>
+
+            <section id="search-container" class="search-input">
+                <input class="search" type="text" id="search-input" placeholder="&#128269; Search for products...">
+            </section>
+
+            <ul>
+            <li title="Home"><a href="Index.html">&#8962;Home</a></li>
+            <li title="About us"><a href="About-us.html">&#9432;About us</a></li>
+            <li title="Services"><a href="Services.html">&#8480;Service</a></li>
+            <li title="Contact us"><a href="contact-us.html">&phone;Contact Us</a></li>
+            <li title="Cart"><a href="cart.html">&#128722;Cart</span><span id="cart-count">0</span></a></li>
+            </ul>
+        </div>
+    </header>
+    <h3>NOT TO BE SEEN</h3>
+    <h3>NOT TO BE SEEN</h3>
+    <h3>categorised by option</h3>
+    <div class="categories">
+        <nav>
+            <ul>
+                <li><a href="samson-shopping-website.html">All Categories</a></li>
+                <li><a href="foods.html">Foods&#127829;</a></li>
+                <li><a href="electronics.html">Electronics&#128254;</a></li>
+                <li><a href="fashion.html">Fashion&#128087;</a></li>
+                <li><a href="games-toys">Games and Toys&#127907;</a></li>
+                <li><a href="health-beauty">Health & Beauty&#127973;</a></li>
+                <!-- Add more categories as needed -->
+            </ul>
+        </nav>
+    </div>
+
+    <div class="body">
+
+    <div class="product">
+        <section id="products-container">
+            <!-- Product listings will be dynamically generated here -->
+        </section>
+    </div>
+        </main>
+        
+        <button id="viewCart" class="view-cart">View Cart</button>
+        
+        <footer>
+          <!-- Add any footer content here -->
+          <div id="feedback-message"></div> <!-- Feedback message container -->
+        </footer>
+</div>
+
+    
+    <script src="script.js"></script>
+</div>
+<script>
+    // JavaScript code for homepage
+    const viewCart = document.getElementById("viewCart")
+        viewCart.addEventListener('click', function() {
+            window.location.href = 'cart.html';
+        });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Existing code...
+
+        const searchInput = document.getElementById('search-input');
+
+        // Event listener for search input
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredProducts = products.filter(product => {
+                return product.name.toLowerCase().includes(searchTerm);
+            });
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const productId = parseInt(button.getAttribute('data-id'));
+        const selectedProduct = products.find(product => product.id === productId);
+        if (selectedProduct) {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const existingCartItem = cartItems.find(item => item.id === productId);
+            if (existingCartItem) {
+                existingCartItem.quantity += 1;
+            } else {
+                cartItems.push({ ...selectedProduct, quantity: 1 });
+            }
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartCount();
+        }
+    });
+});
+            generateProductListings(filteredProducts);
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>samson bank registration form</title>
+</head>
+<style>
+  body {
+    text-align: center;
+  }
+
+  div {
+    margin-bottom: 10px;
+  }
+  
+  .border {
+    background-color: red;
+    border-top-left-radius: 1000px;
+    border-top-right-radius: 1000px;
+    border-bottom-right-radius: 1000px;
+    border-bottom-left-radius: 1000px;
+  }
+</style>
+<body>
+  <h1>Samson Bank registration form</h1>
+
+  <div class="border">
+    <form action="connect.php" method="post">
+
+        <div>
+          <label>First Name :</label>
+          <input type="text" name="first Name" placeholder="First Name" id="firstName">
+        </div>
+      
+        <div>
+          <label>Second Name :</label>
+          <input type="text" name="Second Name" placeholder="Second Name" id="lastName">
+        </div>
+      
+        <div>
+          <label>Password :</label>
+          <input type="password" name="password" placeholder="Password">
+        </div>
+      
+        <div>
+          <label>Choose your Gender :</label>
+          <input type="radio" name="gender"  id="male"  value="M">Male
+          <input type="radio" name="gender" id="female" value="F">Female
+          <input type="radio" name="gender" id="other" value=" O">Other
+        </div>
+      
+
+      <button type="submit">Submit</button>
+      <button type="reset">reset</button>
+    </form>
+  </div>
+</body>
+</html>

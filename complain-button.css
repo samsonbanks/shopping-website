@@ -1,0 +1,40 @@
+h1 {
+  text-decoration: underline;
+}
+span {
+  color: red;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  background-color: red;
+  padding: 8px;
+  border: 2px;
+  color: white;
+  border-radius: 10px;
+}
+
+button:hover {
+  background-color: rgb(255, 114, 114);
+  cursor: pointer;
+}
+
+.checkbox:hover {
+  cursor: pointer;
+}
+
+.tooltip:hover {
+  opacity: 1px;
+}
+
+.yy {
+  background-image: url(images-2/modal6.jpg);
+  height: 600px;
+  color: white;
+  display: block;
+}

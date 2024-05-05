@@ -1,0 +1,33 @@
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: #ffc107;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+.container ul {
+  display: flex;
+  align-items: center;
+}
+.container ul a {
+  padding: 16px;
+}
+.container ul a:hover {
+  background-color: orange;
+}
+.image {
+  height: 60px;
+  width: 60px;
+}

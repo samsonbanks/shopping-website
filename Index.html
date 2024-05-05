@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Samson shopping website</title>
+    <link rel="stylesheet" href="samson-shopping-website.css">
+    <link rel="stylesheet" href="2nd-menu.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="image">
+        <img src="images-2/logo.png">
+      </div>
+      <ul>
+        <li title="Home"><a href="Index.html">Home</a></li>
+        <li title="About us"><a href="About-us.html">About us</a></li>
+        <li title="Services"><a href="Services.html">Service</a></li>
+        <li title="Contact us"><a href="contact-us.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+    <div class="fg">
+        <span class="gam">
+            <h1><span class="samson">Samson</span><span>Tech</span></h1>
+        </span>
+            <h1>Welcome to samson shopping website</h1>
+            <h2>You can order diffrent kinds of Things of your choice from this website</h2>
+            <h3>Tap the ORDER button to order diffrent kinds of foods, clothings, Home appliences and anything you want</h3>
+            <h3>below:</h3>
+
+                  <button id="shop" class="shop">
+                    SHOP NOW
+                  </button>
+        
+                  <button id="complain" onclick="
+                  window.location.href = 'complain-button.html'
+                  " class="complain-button">
+                    Complain
+                  </button>
+        
+                  <button id="contactUs"  class="contact-us-button">
+                    Contact us
+                  </button>
+            </div>
+    </div>
+
+
+    <div class="background">
+      <!-- About us -->
+    <div class="about">
+      <div class="about-image">
+        <img src="images-2/image-1.jpg">
+      </div>
+      <div class="about-content">
+        <h3>We provide the best Logistics Service</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam adipisci illum consequatur laudantium temporibus asperiores corporis libero omnis qui alias!</p>
+
+        <button class="button" id="readMore">Read more</button>
+      </div>
+    </div>
+  
+    <!-- our services -->
+    <div id="services" class="services">
+  
+        <div class="service">
+          <img src="images-2/image-small1.jpg">
+          <h4>Courier Serices</h4>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad dolore temporibus quas molestiae eius. Ipsam aut neque cupiditate totam harum quos sapiente molestias! Beatae est reiciendis reprehenderit unde exercitationem officiis.</p>
+        </div>
+  
+        <div class="service">
+          <img src="images-2/image-small2.jpg">
+          <h4>Air freight</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dicta temporibus illum quidem atque laudantium tempore quibusdam expedita velit ad necessitatibus corporis vel repellendus officia fuga quam tempora, non sapiente?</p>
+        </div>
+  
+        <div class="service">
+          <img src="images-2/image-small4.jpg">
+          <h4>Shippment Cargo</h4>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam sapiente natus sit! Alias, repellat? Id quis nemo obcaecati accusantium fugit excepturi praesentium ut dignissimos voluptates neque numquam, sed, rerum possimus?</p>
+        </div>
+      </div>
+  
+    <div class="footer">
+      <p>Copyright Deratek Logistics 2024 || All Right Reserved.</p>
+    </div>
+    </div>
+
+    <script>
+      const readMore = document.getElementById('readMore')
+      readMore.addEventListener('click', function(){
+        window.location.href = "read-more.html"
+      })
+
+      const shop = document.getElementById('shop')
+      shop.addEventListener('click', function(){
+        window.location.href = 'samson-shopping-website.html'
+      })
+
+
+      const contactUs = document.getElementById('contactUs')
+      contactUs.addEventListener('click', function (){
+        window.location.href = 'contact-us.html'
+      })
+      const services = document.getElementById('services')
+      services.addEventListener('click', function (){
+        window.location.href = 'Services.html'
+      })
+
+    </script>
+    </body>
+    </html>

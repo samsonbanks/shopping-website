@@ -1,0 +1,219 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:image" content="images-2/github.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samson Banks | Shopping Website Nigeria</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="2nd-menu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="image">
+            <img src="images-2/logo.png">
+            </div>
+
+            <section id="search-container" class="search-input">
+                <input class="search" type="text" id="search-input" placeholder="Search for products...">
+            </section>
+
+            <ul>
+            <li title="Home"><a href="Index.html">Home</a></li>
+            <li title="About us"><a href="About-us.html">About us</a></li>
+            <li title="Services"><a href="Services.html">Service</a></li>
+            <li title="Contact us"><a href="contact-us.html">Contact Us</a></li>
+            <li title="Cart"><a href="cart.html"><svg viewBox="0 0 24 24" class="ic" width="20" height="20"><use xlink:href="images/i-icons.a66628fd.svg#shopping-cart"></use></svg>Cart</span><span id="cart-count">0</span></a></li>
+            </ul>
+        </div>
+    </header>
+    <h3>NOT TO BE SEEN</h3>
+    <h3>NOT TO BE SEEN</h3>
+    <h3>categorised by option</h3>
+    <div class="categories">
+        <nav>
+            <ul>
+                <li><a href="samson-shopping-website.html">All Categories</a></li>
+                <li><a href="#">Foods</a></li>
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Home & Living</a></li>
+                <li><a href="#">Health & Beauty</a></li>
+                <!-- Add more categories as needed -->
+            </ul>
+        </nav>
+    </div>
+
+    <div class="body">
+
+    <div class="product">
+        <section id="products-container">
+            <!-- Product listings will be dynamically generated here -->
+        </section>
+    </div>
+        </main>
+        
+        <button id="viewCart" class="view-cart">View Cart</button>
+        
+        <footer>
+          <!-- Add any footer content here -->
+          <div id="feedback-message"></div> <!-- Feedback message container -->
+        </footer>
+</div>
+
+    
+    <script src="script.js"></script>
+</div>
+<script>
+    // JavaScript code for homepage
+    const viewCart = document.getElementById("viewCart")
+        viewCart.addEventListener('click', function() {
+            window.location.href = 'cart.html';
+        });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Existing code...
+
+        const searchInput = document.getElementById('search-input');
+
+        // Event listener for search input
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredProducts = products.filter(product => {
+                return product.name.toLowerCase().includes(searchTerm);
+            });
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const productId = parseInt(button.getAttribute('data-id'));
+        const selectedProduct = products.find(product => product.id === productId);
+        if (selectedProduct) {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const existingCartItem = cartItems.find(item => item.id === productId);
+            if (existingCartItem) {
+                existingCartItem.quantity += 1;
+            } else {
+                cartItems.push({ ...selectedProduct, quantity: 1 });
+            }
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            updateCartCount();
+        }
+    });
+});
+            generateProductListings(filteredProducts);
+        });
+    });
+
+    // script.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    const products = [
+        { id: 0, name: 'Raw ofada rice', price: 50000, image: 'images-2/rice2.jpg'},
+        { id: 1, name: 'Garri', price: 32000, image: 'images-2/menu.jpg'},
+        { id: 2, name: 'Beans', price: 42000, image: 'images-2/menu1.jpg' },
+        { id: 3, name: 'Rice', price: 45000, image: 'images-2/menu2.jpg' },
+        { id: 4, name: 'Yam', price: 4500, image: 'images-2/menu3.jpg' },
+        { id: 5, name: 'Spagetti', price: 2500, image: 'images-2/image-small1.jpg' },
+        { id: 6, name: 'Poundo yam', price: 3000, image: 'images-2/image-small2.jpg' },
+        { id: 7, name: 'Yam flour', price: 3200, image: 'images-2/image-small3.jpg' },
+        { id: 8, name: 'Cassava flour', price: 5500, image: 'images-2/image-small4.jpg' },
+        { id: 9, name: 'Indomie', price: 3000, image: 'images-2/image 1.png' },
+        { id: 10, name: 'Fufu flour', price: 4000, image: 'images-2/image 2.png' },
+        // Add more products as needed
+    ];
+
+    
+    const productsContainer = document.getElementById('products-container');
+    generateProductListings(products);
+
+    function generateProductListings(products) {
+        productsContainer.innerHTML = '';
+        products.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+            <img src="${product.image}">
+                <h3>${product.name}</h3>
+                <p class="price">&#8358;${product.price.toFixed(2)}</p>
+                <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+            `;
+            productsContainer.appendChild(productElement);
+        });
+    }
+
+
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+
+    // Event listener for search input
+    searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredProducts = products.filter(product => {
+            return product.name.toLowerCase().includes(searchTerm);
+        });
+        generateProductListings(filteredProducts);
+
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = parseInt(button.getAttribute('data-id'));
+            const selectedProduct = products.find(product => product.id === productId);
+            if (selectedProduct) {
+                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const existingCartItem = cartItems.find(item => item.id === productId);
+                if (existingCartItem) {
+                    existingCartItem.quantity += 1;
+                } else {
+                    cartItems.push({ ...selectedProduct, quantity: 1 });
+                }
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                updateCartCount();
+            }
+        });
+    });
+    });
+
+    // Existing code for adding products to cart
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = parseInt(button.getAttribute('data-id'));
+            const selectedProduct = products.find(product => product.id === productId);
+            if (selectedProduct) {
+                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const existingCartItem = cartItems.find(item => item.id === productId);
+                if (existingCartItem) {
+                    existingCartItem.quantity += 1;
+                } else {
+                    cartItems.push({ ...selectedProduct, quantity: 1 });
+                }
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                updateCartCount();
+            }
+        });
+    });
+
+    function updateCartCount() {
+        const cartCountElement = document.getElementById('cart-count');
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const totalCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+        cartCountElement.textContent = totalCount;
+    }
+    
+    updateCartCount();
+});
+
+</script>
+
+</body>
+</html>
